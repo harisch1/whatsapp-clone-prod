@@ -71,7 +71,14 @@ function Chat() {
         <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
-          <p> Last Seen at ...</p>
+          <p>
+            {`Last Seen at ${
+              messages[messages.length - 1] &&
+              new Date(
+                messages[messages.length - 1].timestamp.toDate()
+              ).toLocaleTimeString()
+            }`}
+          </p>
         </div>
 
         <div className="chat__headerRight">
@@ -100,7 +107,8 @@ function Chat() {
 
             {message.message}
             <span className="chat__timestamp">
-              {new Date(message.timestamp?.toDate()).toUTCString()}
+              {message.timestamp &&
+                new Date(message.timestamp.toDate()).toLocaleString()}
             </span>
           </p>
         ))}

@@ -11,10 +11,8 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { useStateValue } from "../StateProvider";
 
 function Sidebar() {
-  const [{ user }] = useStateValue();
-
   const [rooms, setRooms] = useState([]);
-
+  const [{ user }] = useStateValue();
   useEffect(() => {
     const colRef = collection(db, "rooms");
     const unSub = onSnapshot(colRef, (snapshot) => {
@@ -35,7 +33,7 @@ function Sidebar() {
     <div className="sidebar">
       {/* Header for the side bar */}
       <div className="sidebar__header">
-        <Avatar src={user?.photoURL} />
+        <Avatar src={user && user.photoURL} />
         <div className="sidebar__headerRight">
           <IconButton>
             <DonutLargeIcon />
